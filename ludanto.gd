@@ -9,11 +9,17 @@ var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	line_edit.text_submitted.connect(_on_LineEdit_text_entered)
-
+	line_edit.text_changed.connect(_on_LineEdit_text_entered)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var velocity = Vector2.ZERO
+	
+	# Skribajxoj
+	#if Input.is_action_pressed("skribi"):
+	#	line_edit.text_submitted.connect(_on_LineEdit_text_entered)
+
+	
+	# movoj
 	if Input.is_action_pressed("movi_dekstren"):
 		velocity.x+=1
 	if Input.is_action_pressed("movi_maldekstren"):
@@ -25,19 +31,19 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_pressed("movi_dekstren_supren"):
 		velocity.x+=1
-		velocity.y+=1
+		velocity.y-=1
 
 	if Input.is_action_pressed("movi_maldekstren_supren"):
 		velocity.x-=1
-		velocity.y+=1
+		velocity.y-=1
 
 	if Input.is_action_pressed("movi_maldekstren_suben"):
 		velocity.x-=1
-		velocity.y-=1
+		velocity.y+=1
 	if Input.is_action_pressed("movi_dekstren_suben"):
 		velocity.x+=1
-		velocity.y-=1
-	
+		velocity.y+=1
+			
 	if velocity.length()>0 : 
 		velocity = velocity.normalized()*speed
 		$AnimatedSprite2D.play()
