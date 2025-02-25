@@ -10,24 +10,24 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_rnkv4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_6melj")
-}],
-"loop": true,
-"name": &"marsxi",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("3_7anxn")
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_ctojb")
 }],
 "loop": true,
-"name": &"supre",
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rnkv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6melj")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -42,16 +42,17 @@ script = ExtResource("1_orhea")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_v3ipd")
-animation = &"supre"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_syau3")
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="LineEdit" type="LineEdit" parent="." node_paths=PackedStringArray("shortcut_context")]
 offset_left = -31.0
 offset_top = -86.0
 offset_right = 36.0625
 offset_bottom = -55.0
+shortcut_context = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="."]
