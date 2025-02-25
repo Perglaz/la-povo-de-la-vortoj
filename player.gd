@@ -15,32 +15,32 @@ func _process(delta: float) -> void:
 	var velocity = Vector2.ZERO
 	
 	# Skribajxoj
-	#if Input.is_action_pressed("skribi"):
+	#if Input.is_action_pressed("write"):
 	#	line_edit.text_submitted.connect(_on_LineEdit_text_entered)
 
 	
 	# movoj
-	if Input.is_action_pressed("movi_dekstren"):
+	if Input.is_action_pressed("move_right"):
 		velocity.x+=1
-	if Input.is_action_pressed("movi_maldekstren"):
+	if Input.is_action_pressed("move_left"):
 		velocity.x-=1
-	if Input.is_action_pressed("movi_supren"):
+	if Input.is_action_pressed("move_up"):
 		velocity.y-=1
-	if Input.is_action_pressed("movi_suben"):
+	if Input.is_action_pressed("move_down"):
 		velocity.y+=1
 	
-	if Input.is_action_pressed("movi_dekstren_supren"):
+	if Input.is_action_pressed("move_right_up"):
 		velocity.x+=1
 		velocity.y-=1
 
-	if Input.is_action_pressed("movi_maldekstren_supren"):
+	if Input.is_action_pressed("move_left_up"):
 		velocity.x-=1
 		velocity.y-=1
 
-	if Input.is_action_pressed("movi_maldekstren_suben"):
+	if Input.is_action_pressed("move_left_down"):
 		velocity.x-=1
 		velocity.y+=1
-	if Input.is_action_pressed("movi_dekstren_suben"):
+	if Input.is_action_pressed("move_right_down"):
 		velocity.x+=1
 		velocity.y+=1
 			
@@ -61,7 +61,6 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.flip_v = velocity.y>0
 
 
-@warning_ignore("unused_parameter")
 func _on_body_entered(body: Node2D) -> void:
 	hide()
 	hit.emit()

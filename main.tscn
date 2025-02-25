@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bshhpam6u0n0l"]
 
-[ext_resource type="PackedScene" uid="uid://2m2dom5edvsm" path="res://ludanto.tscn" id="1_4dn5y"]
+[ext_resource type="PackedScene" uid="uid://2m2dom5edvsm" path="res://player.tscn" id="1_4dn5y"]
 
 [node name="Main" type="Node"]
 
