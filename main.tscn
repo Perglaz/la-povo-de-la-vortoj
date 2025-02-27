@@ -1,8 +1,56 @@
-[gd_scene load_steps=2 format=3 uid="uid://bshhpam6u0n0l"]
+[gd_scene load_steps=3 format=3 uid="uid://bshhpam6u0n0l"]
 
 [ext_resource type="PackedScene" uid="uid://2m2dom5edvsm" path="res://player.tscn" id="1_4dn5y"]
 
+[sub_resource type="GDScript" id="GDScript_0iau5"]
+script/source = "extends Node
+
+@onready var line_edit: LineEdit = $LineEdit
+@onready var player : Area2D = $Player
+
+var isTyping = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	line_edit.text_changed.connect(_on_LineEdit_text_entered)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	
+	# Text inputs 
+	# For now, it's in the Player's code, but later it will probably be in its own code, 
+	
+	# We either start or stop writting, alternating with the current state
+	if Input.is_action_just_pressed(\"write\"): # \"just\" so that it counts the input once only
+		if isTyping == false :
+			line_edit.grab_focus()
+			isTyping = true
+		else : 
+			isTyping = false
+			line_edit.release_focus()
+			line_edit.clear()
+
+
+
+func _on_LineEdit_text_entered(text:String) -> void:
+	if text ==\"akvo\" : # water
+		create_block(\"akvo\")
+		line_edit.clear()
+
+func create_block(text:String) -> void: 
+	# used to create a block, for now it's a block of water
+	if text ==\"akvo\" : # water
+		var akvo = ColorRect.new()
+		akvo.color= Color(0.212, 0.271, 1)
+		akvo.position=Vector2(0,0)
+		akvo.size = Vector2(500,300)
+		#akvo.visible=true
+		add_child(akvo)
+"
+
 [node name="Main" type="Node"]
+script = SubResource("GDScript_0iau5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -12,5 +60,12 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.20073, 0.624646, 0.196966, 1)
 
-[node name="Ludanto" parent="." instance=ExtResource("1_4dn5y")]
+[node name="Player" parent="." instance=ExtResource("1_4dn5y")]
 position = Vector2(214, 218)
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 180.0
+offset_top = 125.0
+offset_right = 247.062
+offset_bottom = 156.0
+metadata/_edit_use_anchors_ = true
