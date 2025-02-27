@@ -9,8 +9,7 @@ https://docs.godotengine.org/en/stable/getting_started/introduction/index.html
 
 Pré-requis : 
 - Installer Godot, vous pouvez le trouver ici : Linux: https://godotengine.org/download/linux/  Windows :  https://godotengine.org/download/windows/
-- Cloner le répertoire de ce github :  ...
-- Ou télécharger ceci ..
+- Cloner le répertoire de ce github
 
 
 Lancement du jeu :  
