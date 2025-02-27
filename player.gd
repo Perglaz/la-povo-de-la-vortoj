@@ -1,6 +1,7 @@
 extends Area2D
 signal hit 
 @export var speed = 400 
+var direction:float  = 0# we don't need it in this file, we will need it to know the direction of the player to create objects
 
 var screen_size 
 var isTyping = false
@@ -10,11 +11,11 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var velocity = Vector2.ZERO
-	
+	var velocity  = Vector2.ZERO 
 	# We either start or stop writting, alternating with the current state
 	if Input.is_action_just_pressed("write"): # "just" so that it counts the input once only
 		isTyping=!isTyping
+		$LineEdit.visible=!$LineEdit.visible # we show the input box only when writting
 	
 	# Movements 
 
@@ -23,27 +24,33 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("move_right_up"):
 			velocity.x+=1
 			velocity.y-=1
+			direction = PI/4
 		if Input.is_action_pressed("move_left_up"):
 			velocity.x-=1
 			velocity.y-=1
+			direction = 3*PI/4
 		if Input.is_action_pressed("move_left_down"):
 			velocity.x-=1
 			velocity.y+=1
+			direction =-3*PI/4 
 		if Input.is_action_pressed("move_right_down"):
 			velocity.x+=1
 			velocity.y+=1
+			direction = -PI/4
 			
 		# Horizontal and vertical movements, not recommended for the player
 		if Input.is_action_pressed("move_right"):
 			velocity.x+=1
+			direction = 0
 		if Input.is_action_pressed("move_left"):
 			velocity.x-=1
+			direction = PI
 		if Input.is_action_pressed("move_up"):
 			velocity.y-=1
+			direction = PI/2
 		if Input.is_action_pressed("move_down"):
 			velocity.y+=1
-		
-
+			direction = -PI/2
 			
 	if velocity.length()>0 : 
 		velocity = velocity.normalized()*speed
