@@ -7,28 +7,31 @@ var isTyping = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	line_edit.text_changed.connect(_on_LineEdit_text_entered) # each time a letter is changed we call _on_LineEdit_text_entered
+	line_edit.text_submitted.connect(_on_LineEdit_text_submitted) # each time a letter is changed we call _on_LineEdit_text_entered
 	# I will use another one like on text_submit later in order to check sentences and not words only
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	
 	# Text inputs 
-	# For now, it's in the main code, but later it mightbe in its own script, 
+	# For now, it's in the main code, but later it might be in its own script, 
 	
 	# We either start or stop writting, alternating with the current state
-	if Input.is_action_just_pressed("write"): # "just" so that it counts the input once only
-		if isTyping == false :
-			line_edit.grab_focus()
+	if Input.is_action_just_pressed("start_writting") and isTyping==false: # "just" so that it counts the input once only
 			isTyping = true
-		else : 
+			line_edit.visible=!line_edit.visible # we show the input box only when writting
+			line_edit.grab_focus()
+
+	if Input.is_action_just_pressed("finish_writting") : 
 			isTyping = false
+			line_edit.visible=!line_edit.visible # we show the input box only when writting
 			line_edit.release_focus()
 			line_edit.clear()
+			
 
 
 
-func _on_LineEdit_text_entered(text:String) -> void:
+func _on_LineEdit_text_submitted(text:String) -> void:
 	if text =="akvo" : # water
 		create_block(text, player.position)
 		line_edit.clear()

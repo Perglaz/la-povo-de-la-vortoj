@@ -4,7 +4,7 @@ signal hit
 var direction:float  = 0# we don't need it in this file, we will need it to know the direction of the player to create objects
 
 var screen_size 
-var isTyping = false
+var isTyping
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,10 +13,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var velocity  = Vector2.ZERO 
 	# We either start or stop writting, alternating with the current state
-	if Input.is_action_just_pressed("write"): # "just" so that it counts the input once only
-		isTyping=!isTyping
-		$LineEdit.visible=!$LineEdit.visible # we show the input box only when writting
-	
+	#if Input.is_action_just_pressed("start_writting") or Input.is_action_just_pressed("finish_writting"): # "just" so that it counts the input once only
+		#isTyping=!isTyping
+		#$LineEdit.visible=!$LineEdit.visible # we show the input box only when writting
+	#
 	# Movements 
 
 	if !isTyping: 	# The player can't move while typing
@@ -79,3 +79,8 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
+
+# To know if the player is writting or not 
+func _on_line_edit_editing_toggled(toggled_on: bool) -> void:
+	isTyping=toggled_on 

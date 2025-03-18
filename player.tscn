@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://2m2dom5edvsm"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_orhea"]
+[ext_resource type="Script" uid="uid://bw5fnjcre3wit" path="res://player.gd" id="1_orhea"]
 [ext_resource type="Texture2D" uid="uid://cafxh8ayayiw3" path="res://art/playerGrey_walk1.png" id="1_rnkv4"]
 [ext_resource type="Texture2D" uid="uid://xp6enigqlmts" path="res://art/playerGrey_walk2.png" id="2_6melj"]
 [ext_resource type="Texture2D" uid="uid://dhcdlp52vuqk3" path="res://art/playerGrey_up1.png" id="3_7anxn"]
@@ -56,3 +56,4 @@ offset_bottom = -63.0
 metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="editing_toggled" from="LineEdit" to="." method="_on_line_edit_editing_toggled"]
