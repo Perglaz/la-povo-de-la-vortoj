@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("move_down"):
 			velocity += Vector2(0,1)
 	
-	# we update the direction every 0.1 seconds
+	# we update the direction every 0.1 second
 	if  delay<0:
 		if velocity !=Vector2.ZERO :
 			direction = velocity.normalized()
@@ -52,6 +52,7 @@ func _process(delta: float) -> void:
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
 	# Since diagonals are the main movements, this part will be modified 
+
 	if velocity.x!=0:
 		$AnimatedSprite2D.animation = "walk"
 		$AnimatedSprite2D.flip_v=false

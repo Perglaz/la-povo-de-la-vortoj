@@ -2,10 +2,12 @@ extends Node
 
 # TODO add another scene that we can controle from main, with colorRect and player inside 
 
+@onready var book_scene = preload("res://book.tscn") # loads the book scene to instantiate and to use it when needed
 
-@onready var line_edit: LineEdit = $Player/LineEdit
-@onready var player : Area2D = $Player
-@onready var book : Node2D = $Book
+@onready var line_edit: LineEdit = $MainScene/Player/LineEdit
+@onready var player : Area2D = $MainScene/Player
+#@onready var book : Node2D = $Book
+
 
 var isTyping = false # used to prevent movements while typing 
 var isSearching = false # used to prevent using powers while looking for words
@@ -46,17 +48,21 @@ func _on_LineEdit_text_submitted(text:String) -> void:
 		create_block(text, player.position)
 		line_edit.clear()
 		
-	# display of the book
-	# open the book
-	elif text == "libro":
+	# open the book 
+	elif text == "libro" && !isSearching:
 		# while reading the book, the player can't move, and can't use his powers 
 		# a bar should display what the player is typing 
-		book.visible = true
+		#book.visible = true
 		isSearching = true
+		$MainScene.get_tree().paused= true # TODO  prevents from typing to unpause the game (oopsy)
+		var book_instance = book_scene.instantiate()
+		add_child(book_instance) # add the book the scene
 	# close the book
-	elif text == "fermi":
-		book.visible = false
+	elif text == "fermi" && isSearching:
+		#book.visible = false
 		isSearching = false 
+		$MainScene.get_tree().paused= false 
+		$Book.queue_free() # TODO  removes the book from the scene 
 		
 func create_block(text:String, _position:Vector2) -> void: 
 	# used to create a block, for now it's a block of water

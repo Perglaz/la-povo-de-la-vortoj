@@ -1,4 +1,6 @@
-extends Area2D
+extends Node
+
+@onready var book_scene = preload("res://book.tscn") # loads the scene book to instantiate it when needed
 
 
 var text2 = " vi estas belega  homo "
@@ -13,6 +15,9 @@ func _ready() -> void:
 	delete_empty_string(text5)
 	print(text5.size())
 	print(text5)
+	
+	var book_instance=book_scene.instantiate()
+	add_child(book_instance)
 
 
 func analyzeText(text:String) -> int : # not int, but a dictionnary
