@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bshhpam6u0n0l"]
+[gd_scene load_steps=5 format=3 uid="uid://lsof74xtdp12"]
 
 [ext_resource type="PackedScene" uid="uid://2m2dom5edvsm" path="res://player.tscn" id="1_4dn5y"]
 [ext_resource type="Script" uid="uid://u6fmn2e7oa43" path="res://main.gd" id="1_vfdia"]
+[ext_resource type="PackedScene" uid="uid://dxamr26sd5rlt" path="res://tests.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ftntfvmwxqod" path="res://book.tscn" id="4_1bvp3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_vfdia")
@@ -16,3 +18,10 @@ color = Color(0.20073, 0.624646, 0.196966, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_4dn5y")]
 position = Vector2(214, 218)
+
+[node name="tests" parent="." instance=ExtResource("3_h2yge")]
+visible = false
+position = Vector2(393.616, 474.363)
+
+[node name="Book" parent="." instance=ExtResource("4_1bvp3")]
+visible = false

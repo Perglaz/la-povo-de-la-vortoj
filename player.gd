@@ -1,10 +1,11 @@
 extends Area2D
 signal hit 
 @export var speed = 400 
-var direction:float  = 0# we don't need it in this file, we will need it to know the direction of the player to create objects
+var direction:Vector2 = Vector2.ZERO
 
 var screen_size 
-var isTyping
+var isTyping # linked to _on_line_edit_editing_toggled to know if the player is typing
+var delay = 0.1 # in seconds, used to update the direction frequently
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,46 +13,34 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var velocity  = Vector2.ZERO 
-	# We either start or stop writting, alternating with the current state
-	#if Input.is_action_just_pressed("start_writting") or Input.is_action_just_pressed("finish_writting"): # "just" so that it counts the input once only
-		#isTyping=!isTyping
-		#$LineEdit.visible=!$LineEdit.visible # we show the input box only when writting
-	#
+	delay -= delta 
 	# Movements 
-
 	if !isTyping: 	# The player can't move while typing
 		# Diagonal movements, recommended for the player
 		if Input.is_action_pressed("move_right_up"):
-			velocity.x+=1
-			velocity.y-=1
-			direction = PI/4
+			velocity += Vector2(1,-1)
 		if Input.is_action_pressed("move_left_up"):
-			velocity.x-=1
-			velocity.y-=1
-			direction = 3*PI/4
+			velocity += Vector2(-1,-1)
 		if Input.is_action_pressed("move_left_down"):
-			velocity.x-=1
-			velocity.y+=1
-			direction =-3*PI/4 
+			velocity += Vector2(-1,1)
 		if Input.is_action_pressed("move_right_down"):
-			velocity.x+=1
-			velocity.y+=1
-			direction = -PI/4
+			velocity += Vector2(1,1)
 			
 		# Horizontal and vertical movements, not recommended for the player
 		if Input.is_action_pressed("move_right"):
-			velocity.x+=1
-			direction = 0
+			velocity += Vector2(1,0)
 		if Input.is_action_pressed("move_left"):
-			velocity.x-=1
-			direction = PI
+			velocity += Vector2(-1,0)
 		if Input.is_action_pressed("move_up"):
-			velocity.y-=1
-			direction = PI/2
+			velocity += Vector2(0,-1)
 		if Input.is_action_pressed("move_down"):
-			velocity.y+=1
-			direction = -PI/2
-			
+			velocity += Vector2(0,1)
+
+	if  delay<0:
+		if velocity !=Vector2.ZERO :
+			direction = velocity 
+		delay=0.1
+
 	if velocity.length()>0 : 
 		velocity = velocity.normalized()*speed
 		$AnimatedSprite2D.play()

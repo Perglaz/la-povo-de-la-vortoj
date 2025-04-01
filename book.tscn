@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://ftntfvmwxqod"]
+
+[ext_resource type="Script" uid="uid://dglnhmc0eth37" path="res://book.gd" id="1_kh36y"]
+
+[node name="Book" type="Node2D"]
+script = ExtResource("1_kh36y")
+
+[node name="PageLeft" type="ColorRect" parent="."]
+offset_left = 372.0
+offset_top = 147.0
+offset_right = 564.0
+offset_bottom = 457.0
+color = Color(0.6, 0.517647, 0.317647, 1)
+metadata/_edit_group_ = true
+
+[node name="TextLeft" type="RichTextLabel" parent="PageLeft"]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 310.0
+theme_override_font_sizes/normal_font_size = 22
+text = "Mangxi
+flugi
+esti
+pomo
+verda
+flava
+bela
+tablo
+sxtono
+birdo"
+
+[node name="PageRight" type="ColorRect" parent="."]
+offset_left = 571.0
+offset_top = 147.0
+offset_right = 763.0
+offset_bottom = 457.0
+color = Color(0.600229, 0.51571, 0.318513, 1)
+metadata/_edit_group_ = true
+
+[node name="TextRight" type="RichTextLabel" parent="PageRight"]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 310.0
+theme_override_font_sizes/normal_font_size = 22
+text = "rapide
+lent
+sur
+sous
+argent
+aimer
+arbre
+doucement
+gentillement
+"

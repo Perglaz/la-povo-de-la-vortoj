@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxamr26sd5rlt"]
+
+[ext_resource type="Texture2D" uid="uid://cyt7h6l368dkf" path="res://art/akvo.PNG" id="1_4j8f0"]
+[ext_resource type="Script" uid="uid://bukqohef3vb02" path="res://tests.gd" id="1_v763p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v763p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lyuq2"]
+radius = 18.0
+
+[node name="tests" type="Area2D"]
+position = Vector2(70, 76)
+script = ExtResource("1_v763p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 99.0
+offset_top = 96.0
+offset_right = 139.0
+offset_bottom = 136.0
+color = Color(0.760155, 0.277414, 0.849425, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(226.5, 124)
+shape = SubResource("RectangleShape2D_v763p")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-16, 53)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(22, 33)
+scale = Vector2(0.131868, 0.139535)
+texture = ExtResource("1_4j8f0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(23, 33)
+shape = SubResource("CircleShape2D_lyuq2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
