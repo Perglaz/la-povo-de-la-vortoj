@@ -72,7 +72,7 @@ func createPath() -> Area2D : # i'll add more customization later
 	var vojo= Area2D.new()
 	var size = Vector2(50,30)
 	
-	vojo.position = set_created_object_position(player.position, player.direction)
+	set_created_object_position(vojo, player.position, player.direction)
 	# the rectangle 
 	var colorRect = createColorRect(Color(0.686, 0.478, 0.29),size )
 	vojo.add_child(colorRect)
@@ -87,7 +87,7 @@ func createPath() -> Area2D : # i'll add more customization later
 func createWater() -> Area2D : # i'll add more customization later
 	var akvo= Area2D.new()
 	
-	akvo.position = set_created_object_position(player.position, player.direction)
+	set_created_object_position(akvo, player.position, player.direction)
 	
 	# the sprite 
 	var sprite = createSprite2D("res://.godot/imported/akvo.PNG-597057749c8a86437cf100d54f45fc22.ctex", Vector2(0.14, 0.14))
@@ -121,12 +121,13 @@ func createColorRect(color:Color, size:Vector2) -> ColorRect :
 
 
 
-func set_created_object_position(position:Vector2,direction:Vector2) -> Vector2:
-	# it will be used to set the position of a newly created object
+func set_created_object_position(object:Area2D, position:Vector2,direction:Vector2) -> void:
+	# it will be used to set the position and rotation of a newly created object
 	# for now , it may lack a center to place correctly the object
-	# the diagonal directions might need to be normalized with .normalized()
 	
+	# position
 	var length = 100 # temporary 
-	var new_position = position+length*direction
-
-	return new_position
+	object.position = position+length*direction
+	
+	 # rotation 
+	object.rotate(direction.angle())

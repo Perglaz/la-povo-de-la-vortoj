@@ -35,14 +35,16 @@ func _process(delta: float) -> void:
 			velocity += Vector2(0,-1)
 		if Input.is_action_pressed("move_down"):
 			velocity += Vector2(0,1)
-
+	
+	# we update the direction every 0.1 seconds
 	if  delay<0:
 		if velocity !=Vector2.ZERO :
-			direction = velocity 
+			direction = velocity.normalized()
 		delay=0.1
 
 	if velocity.length()>0 : 
 		velocity = velocity.normalized()*speed
+		
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
